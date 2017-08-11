@@ -1,4 +1,3 @@
-
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import { Route } from 'react-router-dom'
@@ -15,6 +14,7 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
+    // get all books and set state for the categories
     BooksAPI.getAll().then((books) => {
       this.setState({
         read: books.filter((book) => book.shelf === 'read'),

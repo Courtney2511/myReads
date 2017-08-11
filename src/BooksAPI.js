@@ -22,6 +22,8 @@ export const getAll = () =>
     .then(res => res.json())
     .then(data => data.books)
 
+
+// updates bookShelf, returns an updated array of books for each shelf
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
     method: 'PUT',
