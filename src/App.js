@@ -33,17 +33,23 @@ class BooksApp extends React.Component {
             <h1>MyReads</h1>
           </div>
           <div className="list-books-content">
-            <div>
               <Route exact path="/" render={ () => (
-                <BookShelf
-                  title="Currently Reading"
-                  currentlyReading={ this.state.currentlyReading }
-                  wantToRead={ this.state.wantToRead }
-                  read={ this.state.read }
-                />
+                <div>
+                  <BookShelf
+                    title="Currently Reading"
+                    books={ this.state.currentlyReading }
+                  />
+                  <BookShelf
+                    title="Want To Read"
+                    books={ this.state.wantToRead }
+                  />
+                  <BookShelf
+                    title="Read"
+                    books={ this.state.read }
+                  />
+                </div>
               )} />
               <Route path="/search" component={ SearchBooks } />
-            </div>
           </div>
           <div className="open-search">
             <Link to="/search">Add a book</Link>

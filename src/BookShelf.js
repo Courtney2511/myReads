@@ -3,19 +3,19 @@ import PropTypes from 'prop-types'
 
 class BookShelf extends Component {
   static PropTypes = {
-    currentlyReading: PropTypes.array.isRequired,
+    books: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired
   }
 
   render() {
-    const { currentlyReading } = this.props
+    const { books } = this.props
 
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.props.title}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            { currentlyReading.map((book) =>
+            { books.map((book) =>
               <li key={book.id}>
                 <div className="book">
                   <div className="book-top">
@@ -43,16 +43,3 @@ class BookShelf extends Component {
 }
 
 export default BookShelf
-
-// <div className="list-books">
-//   <div className="list-books-content">
-//     <div>
-//       <CurrentlyReading books={ this.props.currentlyReading } />
-//       <WantToRead />
-//       <Read />
-//     </div>
-//   </div>
-//   <div className="open-search">
-//     <Link to="/search">Add a book</Link>
-//   </div>
-// </div>
