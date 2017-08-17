@@ -36,15 +36,15 @@ class BooksApp extends React.Component {
               <Route exact path="/" render={ () => (
                 <div>
                   <BookShelf
-                    title="Currently Reading"
+                    shelfTitle="Currently Reading"
                     books={ this.state.currentlyReading }
                   />
                   <BookShelf
-                    title="Want To Read"
+                    shelfTitle="Want To Read"
                     books={ this.state.wantToRead }
                   />
                   <BookShelf
-                    title="Read"
+                    shelfTitle="Read"
                     books={ this.state.read }
                   />
                 </div>
