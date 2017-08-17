@@ -5,7 +5,7 @@ import ShelfChanger from './ShelfChanger'
 class BookShelf extends Component {
   static PropTypes = {
     books: PropTypes.array.isRequired,
-    title: PropTypes.string.isRequired
+    shelfTitle: PropTypes.string.isRequired
   }
 
   render() {
@@ -13,7 +13,7 @@ class BookShelf extends Component {
 
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{this.props.title}</h2>
+        <h2 className="bookshelf-title">{this.props.shelfTitle}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             { books.map((book) =>
