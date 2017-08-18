@@ -7,21 +7,27 @@ import SearchBooks from './SearchBooks'
 import BookShelf from './BookShelf'
 
 class BooksApp extends React.Component {
+
   state = {
-    read: [],
-    wantToRead: [],
-    currentlyReading: []
+    books: []
   }
 
   componentDidMount() {
     // get all books and set state for the categories
     BooksAPI.getAll().then((books) => {
       this.setState({
-        read: books.filter((book) => book.shelf === 'read'),
-        wantToRead: books.filter((book) => book.shelf === 'wantToRead'),
-        currentlyReading: books.filter((book) => book.shelf === 'currentlyReading')
+        books
       })
-      console.log(books)
+    })
+  }
+
+// this is kind of hacky but works for now (FIX THIS)
+  updateBookshelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(console.log("backend updated"))
+    BooksAPI.getAll().then(books => {
+      this.setState({
+        books
+      })
     })
   }
 
@@ -37,15 +43,18 @@ class BooksApp extends React.Component {
                 <div>
                   <BookShelf
                     shelfTitle="Currently Reading"
-                    books={ this.state.currentlyReading }
+                    books={ this.state.books.filter((book) => book.shelf === 'currentlyReading') }
+                    updateBookshelf={ this.updateBookshelf }
                   />
                   <BookShelf
                     shelfTitle="Want To Read"
-                    books={ this.state.wantToRead }
+                    books={ this.state.books.filter((book) => book.shelf === 'wantToRead') }
+                    updateBookshelf={ this.updateBookshelf }
                   />
                   <BookShelf
                     shelfTitle="Read"
-                    books={ this.state.read }
+                    books={ this.state.books.filter((book) => book.shelf === 'read') }
+                    updateBookshelf={this.updateBookshelf}
                   />
                 </div>
               )} />

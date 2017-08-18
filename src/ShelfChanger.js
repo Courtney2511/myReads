@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class ShelfChanger extends Component {
+  static PropTypes = {
+    onChangeShelf: PropTypes.func.isRequired
+  }
+  onChange = (e, value) => {
+    e.preventDefault()
+    this.props.onChangeShelf(this.props.book, e.target.value)
+  }
 
   render() {
     return (
-      <form>
-        <select>
+        <select id="shelfSelect" onChange={ this.onChange }>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
           <option value="read">Read</option>
           <option value="none">None</option>
         </select>
-      </form>
     )
   }
 }

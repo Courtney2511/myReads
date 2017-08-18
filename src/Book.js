@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ShelfChanger from './ShelfChanger'
 
 class Book extends Component {
-  state = {
-    currentShelf: this.props.book.shelf
+  static PropTypes = {
+    book: PropTypes.object.isRequired,
+    key: PropTypes.string.isRequired,
+  }
+
+
+  changeShelf = (book, value) => {
+    // take the value from the select options
+    // update the shelf property of the book instance
+    this.props.updateBookshelf(this.props.book, value)
   }
 
   render() {
-    console.log(this.props.book.title, this.props.book.shelf)
+    const { book } = this.props
     return (
       <li>
         <div className="book">
@@ -16,16 +25,16 @@ class Book extends Component {
                 {
                   width: 128,
                   height: 192,
-                  backgroundImage: `url(${this.props.book.imageLinks.thumbnail})`
+                  backgroundImage: `url(${book.imageLinks.thumbnail})`
                 }
             }>
             </div>
             <div className="book-shelf-changer">
-              <ShelfChanger />
+              <ShelfChanger book={ book }onChangeShelf={ this.changeShelf } />
             </div>
           </div>
-          <div className="book-title">{this.props.book.title}</div>
-          <div className="book-authors">{this.props.book.author}</div>
+          <div className="book-title">{ book.title }</div>
+          <div className="book-authors">{ book.author }</div>
         </div>
       </li>
     )
