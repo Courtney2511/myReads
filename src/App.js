@@ -68,7 +68,11 @@ class BooksApp extends React.Component {
                   />
                 </div>
               )} />
-              <Route path="/search" component={ SearchBooks } />
+            <Route path="/search" render={ () => (
+              <SearchBooks
+                updateBookshelf={this.updateBookshelf}
+                />
+            )} />
           </div>
           <div className="open-search">
             <Link to="/search">Add a book</Link>
@@ -80,3 +84,6 @@ class BooksApp extends React.Component {
 }
 
 export default BooksApp
+
+
+// <Route path="/search" component={ SearchBooks } updateBookshelf={this.updateBookshelf}/>

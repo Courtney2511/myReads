@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
-import escapeRegExp from 'escape-string-regexp'
 import * as BooksAPI from './BooksAPI'
 
 
@@ -14,11 +13,10 @@ class SearchBooks extends Component {
 
   updateQuery = (query) => {
     this.setState({ query: query })
-    console.log(query)
   }
 
   render() {
-
+    console.log(this.props.updateBookshelf)
     // let queriedBooks = []
 
     // sends the query to search API, and returns matching books
@@ -52,7 +50,7 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            <BookShelf books={ this.state.books }/>
+            <BookShelf books={ this.state.books } updateBookshelf={this.props.updateBookshelf}/>
           </ol>
         </div>
       </div>
