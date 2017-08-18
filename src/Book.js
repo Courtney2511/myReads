@@ -30,7 +30,7 @@ class Book extends Component {
             }>
             </div>
             <div className="book-shelf-changer">
-              <ShelfChanger book={ book }onChangeShelf={ this.changeShelf } />
+              <ShelfChanger book={ book } onChangeShelf={ this.changeShelf } />
             </div>
           </div>
           <div className="book-title">{ book.title }</div>

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 
 class ShelfChanger extends Component {
   static PropTypes = {
-    onChangeShelf: PropTypes.func.isRequired
+    onChangeShelf: PropTypes.func.isRequired,
+    book: PropTypes.object.isRequired
   }
+
   onChange = (e, value) => {
     e.preventDefault()
     this.props.onChangeShelf(this.props.book, e.target.value)
@@ -12,7 +14,7 @@ class ShelfChanger extends Component {
 
   render() {
     return (
-        <select id="shelfSelect" onChange={ this.onChange }>
+        <select defaultValue={ this.props.book.shelf }id="shelfSelect" onChange={ this.onChange }>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
