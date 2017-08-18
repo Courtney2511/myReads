@@ -1,9 +1,35 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import BookShelf from './BookShelf'
+import escapeRegExp from 'escape-string-regexp'
+import * as BooksAPI from './BooksAPI'
+
 
 class SearchBooks extends Component {
 
+  state = {
+    query: '',
+    books: []
+  }
+
+  updateQuery = (query) => {
+    this.setState({ query: query })
+    console.log(query)
+  }
+
   render() {
+
+    // let queriedBooks = []
+
+    // sends the query to search API, and returns matching books
+    if (this.state.query) {
+      // const match = new RegExp(escapeRegExp(query), 'i')
+      BooksAPI.search(this.state.query).then(matchedBooks => {
+        this.setState({
+          books: matchedBooks
+        })
+      })
+    }
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -17,12 +43,17 @@ class SearchBooks extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text" placeholder="Search by title or author"/>
+            <input type="text"
+                   placeholder="Search by title or author"
+                   value={this.state.query}
+                   onChange={(event) => this.updateQuery(event.target.value)}/>
 
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            <BookShelf books={ this.state.books }/>
+          </ol>
         </div>
       </div>
     )
