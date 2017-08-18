@@ -21,14 +21,24 @@ class BooksApp extends React.Component {
     })
   }
 
-// this is kind of hacky but works for now (FIX THIS)
   updateBookshelf = (book, shelf) => {
-    BooksAPI.update(book, shelf)
-    BooksAPI.getAll().then(books => {
-      this.setState({
-        books
+    BooksAPI.update(book, shelf).then((shelfIds => {
+      this.setState(state => {
+        return {
+          books: state.books.map(b => {
+            if (shelfIds.currentlyReading.includes(b.id)) {
+              return {...b, shelf: "currentlyReading"}
+            } else if (shelfIds.wantToRead.includes(b.id)){
+              return {...b, shelf: "wantToRead"}
+            } else if (shelfIds.read.includes(b.id)){
+              return {...b, shelf: "read"}
+            } else {
+              return {...b, shelf: "none"}
+            }
+          })
+        }
       })
-    })
+    }))
   }
 
   render() {
