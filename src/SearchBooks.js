@@ -13,21 +13,21 @@ class SearchBooks extends Component {
 
   updateQuery = (query) => {
     this.setState({ query: query })
+    // sends the query to search API, and returns matching books
+    if (this.state.query) {
+      this.fetchBooks()
+    }
+  }
+
+  fetchBooks = () => {
+    BooksAPI.search(this.state.query).then(matchedBooks => {
+      this.setState({
+        books: matchedBooks
+      })
+    })
   }
 
   render() {
-    console.log(this.props.updateBookshelf)
-    // let queriedBooks = []
-
-    // sends the query to search API, and returns matching books
-    if (this.state.query) {
-      // const match = new RegExp(escapeRegExp(query), 'i')
-      BooksAPI.search(this.state.query).then(matchedBooks => {
-        this.setState({
-          books: matchedBooks
-        })
-      })
-    }
     return(
       <div className="search-books">
         <div className="search-books-bar">
