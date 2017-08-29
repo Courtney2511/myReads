@@ -9,13 +9,12 @@ class ShelfChanger extends Component {
 
   onChange = (e, value) => {
     e.preventDefault()
-    console.log(this.props.book)
     this.props.updateBookshelf(this.props.book, e.target.value)
   }
 
   render() {
     return (
-        <select id="shelfSelect" onChange={ this.onChange }>
+        <select defaultValue={this.props.book.shelf} id="shelfSelect" onChange={ this.onChange }>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
