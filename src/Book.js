@@ -7,6 +7,7 @@ class Book extends Component {
   };
 
   render() {
+    const { book, updateBookshelf } = this.props
     return (
       <li>
         <div className="book">
@@ -17,18 +18,18 @@ class Book extends Component {
                 width: 128,
                 height: 192,
                 backgroundImage: `url(${
-                  (this.props.book.imageLinks && this.props.book.imageLinks.thumbnail) ? this.props.book.imageLinks.thumbnail : ''})`
+                  (book.imageLinks && book.imageLinks.thumbnail) ? book.imageLinks.thumbnail : ''})`
               }}
             />
             <div className="book-shelf-changer">
               <ShelfChanger
-                book={this.props.book}
-                updateBookshelf={this.props.updateBookshelf}
+                book={book}
+                updateBookshelf={updateBookshelf}
               />
             </div>
           </div>
-          <div className="book-title">{this.props.book.title}</div>
-          <div className="book-authors">{this.props.book.author}</div>
+          <div className="book-title">{book.title}</div>
+          <div className="book-authors">{book.authors && book.authors.join(', ')}</div>
         </div>
       </li>
     );
