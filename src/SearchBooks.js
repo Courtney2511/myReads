@@ -8,7 +8,7 @@ class SearchBooks extends Component {
 
   state = {
     query: '',
-    books: []
+    searchResults: []
   }
 
   updateQuery = (query) => {
@@ -20,10 +20,13 @@ class SearchBooks extends Component {
   }
 
   fetchBooks = () => {
-    BooksAPI.search(this.state.query).then(matchedBooks => {
-      this.setState({
-        books: matchedBooks
-      })
+    BooksAPI.search(this.state.query).then(response => {
+      if (!response.error) {
+        this.setState({
+          searchResults: response
+        })
+        console.log(response)
+      } 
     })
   }
 
@@ -50,7 +53,7 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            <BookShelf books={ this.state.books } updateBookshelf={this.props.updateBookshelf}/>
+            <BookShelf books={ this.state.searchResults } updateBookshelf={this.props.updateBookshelf}/>
           </ol>
         </div>
       </div>
