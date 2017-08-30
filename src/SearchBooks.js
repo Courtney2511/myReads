@@ -12,25 +12,35 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
+    console.log("query", query)
     this.setState({ query: query })
     // sends the query to search API, and returns matching books
-    if (this.state.query) {
-      this.fetchBooks()
+    if (query) {
+      this.fetchBooks(query)
     }
   }
 
-  fetchBooks = () => {
-    BooksAPI.search(this.state.query).then(response => {
+  getShelfForBookId = (id) => {
+    const book = this.props.books.find((book) => book.id === id)
+    return (book) ? book.shelf : 'none'
+  }
+
+  fetchBooks = (query) => {
+    BooksAPI.search(query).then(response => {
       if (!response.error) {
+        const resultsWithShelves = response.map((searchResult) => {
+           return {...searchResult, shelf: this.getShelfForBookId(searchResult.id)}
+         })
         this.setState({
-          searchResults: response
+          searchResults: resultsWithShelves
         })
-        console.log(response)
-      } 
+      }
     })
   }
 
   render() {
+
+
     return(
       <div className="search-books">
         <div className="search-books-bar">

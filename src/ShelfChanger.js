@@ -14,7 +14,7 @@ class ShelfChanger extends Component {
 
   render() {
     return (
-        <select defaultValue={this.props.book.shelf} id="shelfSelect" onChange={ this.onChange }>
+        <select defaultValue={(this.props.book.shelf) ? this.props.book.shelf : "none"} id="shelfSelect" onChange={ this.onChange }>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
