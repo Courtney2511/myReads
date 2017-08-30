@@ -10,10 +10,21 @@ clone the repo in your terminal
 git clone https://github.com/Courtney2511/myReads.git
 ```
 
-start the server
+navigate into the myReads directory
 
 ```
 cd myReads
+```
+
+install dependencies
+
+```
+npm install
+```
+
+start the server
+
+```
 npm start
 ```
 

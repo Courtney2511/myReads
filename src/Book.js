@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 import ShelfChanger from "./ShelfChanger";
 
 class Book extends Component {
@@ -29,8 +30,14 @@ class Book extends Component {
           <div className="book-authors">{book.authors && book.authors.join(', ')}</div>
         </div>
       </li>
-    );
+    )
   }
+}
+
+Book.PropTypes = {
+  key: PropTypes.string.isRequired,
+  book: PropTypes.object.isRequired,
+  updateBookshelf: PropTypes.func.isRequired
 }
 
 export default Book;

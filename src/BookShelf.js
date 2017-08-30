@@ -15,7 +15,7 @@ class BookShelf extends Component {
           </ol>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -23,6 +23,6 @@ BookShelf.PropTypes = {
   books: PropTypes.array.isRequired,
   shelfTitle: PropTypes.string.isRequired,
   updateBookshelf: PropTypes.func.isRequired
-};
+}
 
 export default BookShelf;
